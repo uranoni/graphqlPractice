@@ -38,7 +38,7 @@ const Person = new GraphQLObjectType({
         }
       },
       posts:{
-        type:Post,
+        type:new GraphQLList(Post),
         resolve(person){
           return person.getPosts();
         }
@@ -69,7 +69,7 @@ const Post = new GraphQLObjectType({
       content:{
           type:GraphQLString,
           resolve(post){
-            return post.email
+            return post.content;
           }
         
       }
