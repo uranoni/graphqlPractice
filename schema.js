@@ -89,6 +89,12 @@ const Query = new GraphQLObjectType({
         resolve(root,args){
           return Db.models.person.findAll({where:args});
         }
+      },
+      posts:{
+        type:new GraphQLList(Post),
+        resolve(root,args){
+          return Db.models.post.findAll({where:args});
+        }
       }
     }
   }
