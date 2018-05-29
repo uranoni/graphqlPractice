@@ -9,6 +9,11 @@ const Conn = new Sequelize(
   {
     host: 'localhost',
     dialect: 'mysql',
+    pool: {
+      max: 5,
+      min: 0,
+      idle: 10000
+    }
 });
 
 const Person = Conn.define('person',{
@@ -44,7 +49,7 @@ Person.hasMany(Post);
 Post.belongsTo(Person);
 
 Conn.sync({force:true}).then(()=>{
-  _.times(10,()=>{
+  _.times(20,()=>{
     return  Person.create({
       firstName:Faker.name.firstName(),
       lastName:Faker.name.lastName(),
